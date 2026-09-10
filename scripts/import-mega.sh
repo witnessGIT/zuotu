@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# MEGA → Git 素材导入入口。修改此文件会触发 GitHub Actions 导入。
 MEGA_URL="${1:-https://mega.nz/folder/boFk0TiD#iX6HknzaJ_VFFyxK56VCLQ}"
 DEST="${2:-素材/郭文贵/mega}"
 
