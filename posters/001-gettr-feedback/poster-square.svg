@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1080" viewBox="0 0 1080 1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07090d"/>
+      <stop offset="0.55" stop-color="#101722"/>
+      <stop offset="1" stop-color="#0a0e15"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="82%" cy="10%" r="70%">
+      <stop offset="0" stop-color="#2a3a56" stop-opacity="0.75"/>
+      <stop offset="0.42" stop-color="#151d2a" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#0a0e15" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#b88635"/>
+      <stop offset="0.5" stop-color="#f2d28a"/>
+      <stop offset="1" stop-color="#c39543"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="1080" height="1080" fill="url(#bg)"/>
+  <rect width="1080" height="1080" fill="url(#glow)"/>
+  <circle cx="926" cy="124" r="240" fill="none" stroke="#d7ae5e" stroke-opacity="0.08" stroke-width="1.2"/>
+  <circle cx="926" cy="124" r="178" fill="none" stroke="#d7ae5e" stroke-opacity="0.06" stroke-width="1.2"/>
+  <text x="1046" y="184" text-anchor="end" font-family="Arial,Helvetica,sans-serif" font-size="112" font-weight="800" fill="#ffffff" opacity="0.025">GETTR</text>
+
+  <g transform="translate(72,68)">
+    <rect x="0" y="0" width="156" height="34" rx="17" fill="url(#gold)"/>
+    <text x="78" y="23" text-anchor="middle" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="15" font-weight="800" fill="#111317" letter-spacing="2">GETTR · 反馈</text>
+
+    <text x="0" y="112" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="48" font-weight="800" fill="#f5f7fa">郭先生来电</text>
+    <text x="0" y="182" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="72" font-weight="900" fill="url(#gold)">“非常非常震撼”</text>
+
+    <line x1="0" y1="218" x2="936" y2="218" stroke="#d6ae60" stroke-opacity="0.55" stroke-width="1.4"/>
+
+    <text x="0" y="266" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="500" fill="#cdd4de">郭先生今天打来电话，对昨天的 GETTR 活动节目表示非常非常震撼，</text>
+    <text x="0" y="300" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="22" font-weight="500" fill="#cdd4de">并对多档节目与作品给出反馈。</text>
+
+    <g transform="translate(0,340)" filter="url(#shadow)">
+      <rect x="0" y="0" width="936" height="132" rx="24" fill="#141c28" stroke="#293548"/>
+      <rect x="0" y="0" width="8" height="132" rx="4" fill="url(#gold)"/>
+      <text x="34" y="54" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="26" font-weight="700" fill="#eef2f6">七哥评价：</text>
+      <text x="34" y="98" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="34" font-weight="900" fill="#ffffff">“战友们做得都</text>
+      <text x="300" y="98" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="34" font-weight="900" fill="url(#gold)">非常非常好</text>
+      <text x="494" y="98" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="34" font-weight="900" fill="#ffffff">”</text>
+    </g>
+
+    <g transform="translate(0,510)" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif">
+      <g font-size="18" fill="#eef2f6">
+        <text x="0" y="28"><tspan fill="#d8b367" font-weight="800">01</tspan><tspan dx="16">Hpay《为自由而生》</tspan></text>
+        <text x="0" y="70"><tspan fill="#d8b367" font-weight="800">02</tspan><tspan dx="16">盘古先生的节目</tspan></text>
+        <text x="0" y="112"><tspan fill="#d8b367" font-weight="800">03</tspan><tspan dx="16">避风港第 639 期节目</tspan></text>
+        <text x="0" y="154"><tspan fill="#d8b367" font-weight="800">04</tspan><tspan dx="16">Q-May 音乐《女猫王的故事》</tspan></text>
+        <text x="0" y="196"><tspan fill="#d8b367" font-weight="800">05</tspan><tspan dx="16">台湾农场 8 月 15 日大街访</tspan></text>
+        <text x="0" y="238"><tspan fill="#d8b367" font-weight="800">06</tspan><tspan dx="16">Rica 8 月 28 日节目</tspan></text>
+      </g>
+
+      <line x1="450" y1="0" x2="450" y2="254" stroke="#2c3748"/>
+
+      <g transform="translate(492,0)" font-size="18" fill="#eef2f6">
+        <text x="0" y="28"><tspan fill="#d8b367" font-weight="800">07</tspan><tspan dx="16">意大利农场 8 月 31 日节目</tspan></text>
+        <text x="0" y="70"><tspan fill="#d8b367" font-weight="800">08</tspan><tspan dx="16">上海农场 8 月 29 日「经济孤岛」</tspan></text>
+        <text x="0" y="112"><tspan fill="#d8b367" font-weight="800">09</tspan><tspan dx="16">纽约磐石农场第 112 期</tspan></text>
+        <text x="0" y="154"><tspan fill="#d8b367" font-weight="800">10</tspan><tspan dx="16">华盛顿自由农场第 118 期</tspan></text>
+        <text x="0" y="196"><tspan fill="#d8b367" font-weight="800">11</tspan><tspan dx="16">英国伦敦阳光农场第 152 期</tspan></text>
+      </g>
+    </g>
+
+    <line x1="0" y1="832" x2="936" y2="832" stroke="#d6ae60" stroke-opacity="0.35"/>
+    <text x="0" y="874" font-family="Arial,'Microsoft YaHei',sans-serif" font-size="16" fill="#8f9aaa" letter-spacing="2">GETTR PROGRAM FEEDBACK · POSTER 001</text>
+    <text x="936" y="874" text-anchor="end" font-family="'Noto Sans SC','Microsoft YaHei',sans-serif" font-size="16" fill="#aeb8c5">1:1 正式发布版</text>
+  </g>
+</svg>
