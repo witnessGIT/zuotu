@@ -13,17 +13,18 @@ permissions:
 jobs:
   import-mega:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install MEGA downloader
+      - name: Install MEGA downloader and preview tools
         shell: bash
         run: |
           set -euxo pipefail
           sudo apt-get update
           sudo apt-get install -y megatools
+          python -m pip install pillow
 
       - name: Download MEGA folder
         shell: bash
@@ -33,6 +34,74 @@ jobs:
           megadl 'https://mega.nz/folder/boFk0TiD#iX6HknzaJ_VFFyxK56VCLQ' --path '素材/郭文贵/mega'
           find '素材/郭文贵/mega' -type f -print | sort
           du -sh '素材/郭文贵/mega'
+
+      - name: Build lightweight image index and contact sheets
+        shell: bash
+        run: |
+          set -euxo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          from PIL import Image, ImageOps, ImageDraw, ImageFont
+          import json, math
+
+          root = Path('素材/郭文贵/mega')
+          out = Path('mega-preview')
+          sheets = out / 'sheets'
+          sheets.mkdir(parents=True, exist_ok=True)
+          exts = {'.jpg', '.jpeg', '.png', '.webp', '.bmp', '.gif', '.tif', '.tiff'}
+          files = sorted(p for p in root.rglob('*') if p.is_file() and p.suffix.lower() in exts)
+
+          items = []
+          for i, p in enumerate(files):
+              rec = {'index': i, 'path': p.as_posix(), 'name': p.name}
+              try:
+                  with Image.open(p) as im:
+                      rec.update({'width': im.width, 'height': im.height, 'format': im.format})
+              except Exception as e:
+                  rec['error'] = str(e)
+              items.append(rec)
+
+          cell_w, cell_h = 280, 220
+          img_w, img_h = 260, 165
+          cols, rows = 4, 4
+          per_sheet = cols * rows
+          font = ImageFont.load_default()
+
+          for s in range(math.ceil(len(files) / per_sheet)):
+              page = Image.new('RGB', (cols * cell_w, rows * cell_h), 'white')
+              draw = ImageDraw.Draw(page)
+              for j in range(per_sheet):
+                  idx = s * per_sheet + j
+                  if idx >= len(files):
+                      break
+                  p = files[idx]
+                  x = (j % cols) * cell_w + 10
+                  y = (j // cols) * cell_h + 10
+                  try:
+                      with Image.open(p) as im:
+                          im = ImageOps.exif_transpose(im).convert('RGB')
+                          im.thumbnail((img_w, img_h))
+                          px = x + (img_w - im.width) // 2
+                          py = y + (img_h - im.height) // 2
+                          page.paste(im, (px, py))
+                  except Exception:
+                      pass
+                  draw.text((x, y + img_h + 5), f'#{idx} {p.name[:30]}', fill='black', font=font)
+              page.save(sheets / f'sheet_{s:04d}.jpg', 'JPEG', quality=68, optimize=True)
+
+          (out / 'manifest.json').write_text(json.dumps({'count': len(items), 'items': items}, ensure_ascii=False, indent=2), encoding='utf-8')
+          (out / 'README.txt').write_text(f'Images: {len(items)}\nContact sheets: {math.ceil(len(items) / per_sheet)}\n', encoding='utf-8')
+          print(f'Indexed {len(items)} images')
+          PY
+
+      - name: Upload lightweight preview artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: guo-mega-preview
+          path: mega-preview
+          if-no-files-found: error
+          retention-days: 7
+          compression-level: 6
 
       - name: Upload MEGA assets artifact
         uses: actions/upload-artifact@v4
