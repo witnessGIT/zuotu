@@ -1,0 +1,48 @@
+name: Import MEGA assets
+
+on:
+  push:
+    paths:
+      - '.github/workflows/import-mega-assets.yml'
+      - 'scripts/import-mega.sh'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-mega:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install MEGA downloader
+        shell: bash
+        run: |
+          set -euxo pipefail
+          sudo apt-get update
+          sudo apt-get install -y megatools
+
+      - name: Download MEGA folder
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p '素材/郭文贵/mega'
+          megadl 'https://mega.nz/folder/boFk0TiD#iX6HknzaJ_VFFyxK56VCLQ' --path '素材/郭文贵/mega'
+          find '素材/郭文贵/mega' -type f -print | sort
+
+      - name: Commit downloaded assets
+        shell: bash
+        run: |
+          set -euxo pipefail
+          git config user.name 'zuotu-bot'
+          git config user.email 'zuotu-bot@users.noreply.github.com'
+          git add '素材/郭文贵/mega'
+          if git diff --cached --quiet; then
+            echo 'No new assets to commit.'
+            exit 0
+          fi
+          git commit -m 'Import Guo photo assets from MEGA [skip ci]'
+          git push
